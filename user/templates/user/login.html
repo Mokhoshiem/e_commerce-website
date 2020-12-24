@@ -1,0 +1,20 @@
+{% extends 'store/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container border p-5 bg-dark" >
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-3">تسجيل الدخول</legend>
+                {{form | crispy}}
+            </fieldset>
+            <div class="container" >
+                <button class="center btn btn-outline-info"><strong>دخول</strong></button>
+
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <b class="text-muted">حساب جديد؟ <a href="{% url 'user:user-register' %}" class="ml-3">من هنا</a></b>
+        </div>
+    </div>
+{% endblock %}

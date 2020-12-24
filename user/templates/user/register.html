@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container bg-dark">
+        <form method='POST'>
+            {% csrf_token %}
+            <div class="form-group">
+                <legend class="border-bottom">البيانات الرئيسية</legend>
+                {{form|crispy}}
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="تسجيل">
+            </div>
+            <div>
+                <span>لديك حساب بالفعل؟</span>
+                <a href="{% url 'user:login' %}">سجل الدخول</a>
+            </div>
+
+          </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block content %}
+<h3 class="container btn btn-outline-success"><a href="{% url 'store:store-home' %}"><strong>عودة للفئات</strong></a></h3>
+    <div class="container">
+        <div class="main d-flex">
+            <div class="container d-flex flex-wrap">
+                <div class="col col-lg-3 ml-5 p-1">
+                    <div class="border rounded-1 shadow-lg">
+                        <img class="product-img shadow-lg" src="{{product.image.url}}" alt="Product-image" width="310" height="300">
+                        <div class="product-info-box ">
+                            <table class="table product-info">
+                                <tr>
+                                    <th><strong>{{object.name}}</strong></th>
+                                </tr>
+                                <tr class="product-size">
+                                    <td><small>المقاس: </small></td>
+                                    <td><small>{{object.size}}</small></td>
+                                </tr>
+                                <tr class="product-price">
+                                    <td><small>السعر </small></td>
+                                    <td><i class="the-price">{{object.price}}</i></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="container product-actions">
+                            <button class="update-cart btn btn-outline-success" data-product={{product.id}} data-action="add">إضافة للسلة</button>
+                        </div>
+                    </div>
+                </div>
+
+    
+                
+            </div>
+            <div class="container side-bar">
+                <div id="carouselExampleControls" class="carousel slide border mb-3 rounded-2" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="{% static 'images/1.jpg' %}" class="d-block w-100" alt="Image" width="200" height="400">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'images/2.jpg' %}" class="d-block w-100" alt="Image" width="200" height="400">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'images/3.jpg' %}" class="d-block w-100" alt="Image" width="200" height="400">
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </a>
+                  </div>    
+                
+                <div class="adds border rounded-2">
+                    <img  src="{% static 'images/placeholder.png' %}" alt="Add" width="00" height="400">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

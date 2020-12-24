@@ -1,0 +1,73 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="main-wrapper-check d-flex">
+        <div class="right m-2">
+            <div class="row">
+                <form class="checkout-form" method="POST">
+                    {% csrf_token %}
+                    <div class="user-info form-group">
+                        <input name="username" type="text" placeholder="أدخل الإسم" required>
+                        <input name="tel1" type="tel" placeholder="أدخل رقم الهاتف" required>
+                    </div>
+                    <div class="shipping-info">
+                        <hr>
+                        <legend class="more-info-legend">معلومات أخرى</legend>
+                        <hr>
+                        <input class="d-block checkout-input mb-3" name="address" type="text" placeholder="العنوان" required>
+                        <input class="d-block checkout-input mb-3" name="city" type="text" placeholder="المدينة" required>
+                        <input class="d-block checkout-input mb-3" name="state" type="text" placeholder="المحافظة" required>
+                        <input class="d-block checkout-input mb-3" name="tel2" type="tel" placeholder="رقم هاتف بديل" required>
+                    </div>
+                    <input class="btn btn-success btn-block" id="check-form-btn" type="submit" value="إكمال الطلب">
+                    
+
+                </form>
+                
+            </div>
+        </div>
+        <div class="left rounded-3 m-2 p-3" style="flex: 3;">
+            <div class="box-element shadow-lg rounded-1">
+                <div class="cart-row mb-3  d-flex">
+                    <div style="flex:1"></div>
+                    <div style="flex:2">المنتج</div>
+                    <div style="flex:1">الكمية</div>
+                    <div style="flex:1">السعر</div>
+                    <div style="flex:1">الإجمالي</div>
+                </div>
+                <hr>
+                
+                {% for item in items %}
+                <div class="cart-row mb-1 d-flex">
+                    <div style="flex:1">
+                        <img src="{{item.product.image.url}}" width="40" height="40"></div>
+                    <div style="flex:2">{{item.product.name}}</div>
+                    <div class="cart-quantity-div" style="flex:1">
+                        <p class="product-cart-quantity cart-item">{{item.quantity}}</p>
+                    </div>
+                    <div class="align-middle " style="flex:1">{{item.product.price|floatformat:2}}</div>
+                    <div class="align-middle cart-item-total" style="flex:1">{{item.get_total|floatformat:2}}</div>
+                </div>
+                {% endfor %}
+                <hr>
+                <div class="summary container mb-5 mt-5 ">
+                    <div class="continer summary-total-items m-1 p-1">
+                        <strong>عدد القطع : </strong>
+                        <b id="summary-total-items-final items-cart-num">{{order.get_cart_items}}</b>
+                    </div>
+                    <div class="summary-total-items border-bottom m-1 p-1">
+                        <strong>إجمالي المبلغ : </strong>
+                        <b id="summary-total-all-final">{{order.get_cart_total|floatformat:2}}</b>
+                    </div>
+                </div>
+            <a class="btn btn-outline-warning " href="{% url 'store:cart' %}">&#x2192; عودة للسلة</a>
+            <button class="alt-confirm btn btn-outline-warning btn-block hidden">تأكيد العملية</button>
+
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/checkout.js' %}"></script>
+{% endblock %}
